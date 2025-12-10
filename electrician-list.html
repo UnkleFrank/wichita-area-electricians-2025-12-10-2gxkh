@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Electrician List">
+    <meta name="keywords" content="electricians Wichita, licensed electricians Kansas, same-day electrical service, electrical repair">
+    <meta name="author" content="Wichita Area Electricians">
+    <meta property="og:title" content="Electrician List">
+    <meta property="og:description" content="Electrician List">
+    <meta property="og:type" content="website">
+    <title>Electrician List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+        }
+        
+        .primary-accent {
+            color: #FF5A5F;
+        }
+        
+        .primary-bg {
+            background-color: #FF5A5F;
+        }
+        
+        .secondary-accent {
+            color: #FFD166;
+        }
+        
+        .secondary-bg {
+            background-color: #FFD166;
+        }
+        
+        .dark-bg {
+            background-color: #1A1A1A;
+        }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #FF5A5F 0%, #FF7A7F 100%);
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+        }
+        
+        .btn-primary {
+            background-color: #FF5A5F;
+            color: white;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 300ms ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            filter: brightness(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 90, 95, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: #FFD166;
+            color: #1A1A1A;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 300ms ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-secondary:hover {
+            filter: brightness(0.95);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 209, 102, 0.3);
+        }
+        
+        .card {
+            background-color: #1A1A1A;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 300ms ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 90, 95, 0.3);
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.875rem;
+            }
+        }
+        
+        .faq-item {
+            background-color: #1A1A1A;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 300ms ease-in-out;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(255, 90, 95, 0.3);
+        }
+        
+        .faq-question {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 300ms ease-in-out;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(255, 90, 95, 0.05);
+        }
+        
+        .faq-icon {
+            transition: transform 300ms ease-in-out;
+            color: #FF5A5F;
+        }
+        
+        .faq-answer {
+            padding: 0 24px 20px 24px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            transition: all 300ms ease-in-out;
+        }
+        
+        .faq-answer.hidden {
+            display: none;
+        }
+        
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #FF5A5F;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 300ms ease-in-out;
+        }
+        
+        .nav-menu a:hover {
+            color: #FF5A5F;
+        }
+        
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgba(15, 15, 15, 0.98);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-direction: column;
+            padding: 16px 24px;
+            gap: 12px;
+            z-index: 40;
+        }
+        
+        .mobile-menu.hidden {
+            display: none !important;
+        }
+        
+        .mobile-menu:not(.hidden) {
+            display: flex;
+        }
+        
+        .mobile-menu a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 0;
+            transition: color 300ms ease-in-out;
+        }
+        
+        .mobile-menu a:hover {
+            color: #FF5A5F;
+        }
+        
+        .electrician-card {
+            background-color: #1A1A1A;
+            border-radius: 8px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 300ms ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .electrician-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 90, 95, 0.3);
+        }
+        
+        .electrician-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .electrician-avatar {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #FF5A5F 0%, #FF7A7F 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink-0;
+        }
+        
+        .electrician-info {
+            flex-grow: 1;
+        }
+        
+        .electrician-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .electrician-title {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+        
+        .electrician-rating {
+            color: #FFD166;
+            font-size: 0.875rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        
+        .electrician-details {
+            space-y: 12px;
+            flex-grow: 1;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .detail-item .material-symbols-rounded {
+            color: #FF5A5F;
+            font-size: 18px;
+            flex-shrink-0;
+        }
+        
+        .electrician-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .electrician-actions a {
+            flex: 1;
+        }
+        
+        .btn-small {
+            padding: 10px 16px;
+            font-size: 0.875rem;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-small-primary {
+            background-color: #FF5A5F;
+            color: white;
+        }
+        
+        .btn-small-primary:hover {
+            filter: brightness(1.1);
+            transform: scale(1.05);
+        }
+        
+        .btn-small-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-small-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 90, 95, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">⚡ Wichita Electricians</a>
+            <div class="nav-menu">
+                <a href="index.html#features">Services</a>
+                <a href="index.html#benefits">Benefits</a>
+                <a href="index.html#testimonials">Testimonials</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="index.html#about">About</a>
+                <a href="electrician-list.html">Electrician List</a>
+                <a href="https://electricians.wichita-area.com" class="btn-primary">Get Service</a>
+            </div>
+            <button class="mobile-menu-button" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <div class="mobile-menu hidden">
+            <a href="index.html#features">Services</a>
+            <a href="index.html#benefits">Benefits</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="index.html#about">About</a>
+            <a href="electrician-list.html">Electrician List</a>
+            <a href="https://electricians.wichita-area.com" class="btn-primary w-full justify-center">Get Service</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 md:py-28 px-4 md:px-6 bg-gradient-to-b from-gray-900 to-gray-950">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                    Meet Our <span class="primary-accent">Expert Electricians</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    Browse our team of licensed, certified professionals ready to serve your electrical needs in Wichita with expertise and reliability.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Electricians List Section -->
+    <section class="py-20 md:py-28 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12">
+                <h2 class="section-title primary-accent mb-4">Available Electricians</h2>
+                <p class="text-xl text-gray-300">
+                    All our electricians are fully licensed, insured, and ready to provide professional electrical services.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Electrician 1 -->
+                <div class="electrician-card">
+                    <div class="electrician-header">
+                        <div class="electrician-avatar">
+                            <span class="material-symbols-rounded text-4xl">person</span>
+                        </div>
+                        <div class="electrician-info">
+                            <div class="electrician-name">Marcus Johnson</div>
+                            <div class="electrician-title">Master Electrician</div>
+                        </div>
+                    </div>
+                    <div class="electrician-rating">★★★★★ (4.9/5)</div>
+                    <div class="electrician-details space-y-3">
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span>15+ Years Experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">home_repair_service</span>
+                            <span>Residential & Commercial</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span>Same-Day Available</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">shield</span>
+                            <span>Fully Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <div class="electrician-actions">
+                        <a href="https://electricians.wichita-area.com" class="btn-small btn-small-primary">
+                            <span class="material-symbols-rounded">electric_bolt</span>
+                            Book Now
+                        </a>
+                        <a href="tel:+1234567890" class="btn-small btn-small-secondary">
+                            <span class="material-symbols-rounded">phone</span>
+                            Call
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Electrician 2 -->
+                <div class="electrician-card">
+                    <div class="electrician-header">
+                        <div class="electrician-avatar">
+                            <span class="material-symbols-rounded text-4xl">person</span>
+                        </div>
+                        <div class="electrician-info">
+                            <div class="electrician-name">Sarah Williams</div>
+                            <div class="electrician-title">Licensed Electrician</div>
+                        </div>
+                    </div>
+                    <div class="electrician-rating">★★★★★ (4.8/5)</div>
+                    <div class="electrician-details space-y-3">
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span>12+ Years Experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">home_repair_service</span>
+                            <span>Residential Specialist</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span>Same-Day Available</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">shield</span>
+                            <span>Fully Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <div class="electrician-actions">
+                        <a href="https://electricians.wichita-area.com" class="btn-small btn-small-primary">
+                            <span class="material-symbols-rounded">electric_bolt</span>
+                            Book Now
+                        </a>
+                        <a href="tel:+1234567890" class="btn-small btn-small-secondary">
+                            <span class="material-symbols-rounded">phone</span>
+                            Call
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Electrician 3 -->
+                <div class="electrician-card">
+                    <div class="electrician-header">
+                        <div class="electrician-avatar">
+                            <span class="material-symbols-rounded text-4xl">person</span>
+                        </div>
+                        <div class="electrician-info">
+                            <div class="electrician-name">David Rodriguez</div>
+                            <div class="electrician-title">Commercial Electrician</div>
+                        </div>
+                    </div>
+                    <div class="electrician-rating">★★★★★ (4.9/5)</div>
+                    <div class="electrician-details space-y-3">
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span>18+ Years Experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">home_repair_service</span>
+                            <span>Commercial Specialist</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span>Same-Day Available</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">shield</span>
+                            <span>Fully Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <div class="electrician-actions">
+                        <a href="https://electricians.wichita-area.com" class="btn-small btn-small-primary">
+                            <span class="material-symbols-rounded">electric_bolt</span>
+                            Book Now
+                        </a>
+                        <a href="tel:+1234567890" class="btn-small btn-small-secondary">
+                            <span class="material-symbols-rounded">phone</span>
+                            Call
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Electrician 4 -->
+                <div class="electrician-card">
+                    <div class="electrician-header">
+                        <div class="electrician-avatar">
+                            <span class="material-symbols-rounded text-4xl">person</span>
+                        </div>
+                        <div class="electrician-info">
+                            <div class="electrician-name">Jennifer Martinez</div>
+                            <div class="electrician-title">Master Electrician</div>
+                        </div>
+                    </div>
+                    <div class="electrician-rating">★★★★★ (4.7/5)</div>
+                    <div class="electrician-details space-y-3">
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span>14+ Years Experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">home_repair_service</span>
+                            <span>Residential & Commercial</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span>Same-Day Available</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">shield</span>
+                            <span>Fully Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <div class="electrician-actions">
+                        <a href="https://electricians.wichita-area.com" class="btn-small btn-small-primary">
+                            <span class="material-symbols-rounded">electric_bolt</span>
+                            Book Now
+                        </a>
+                        <a href="tel:+1234567890" class="btn-small btn-small-secondary">
+                            <span class="material-symbols-rounded">phone</span>
+                            Call
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Electrician 5 -->
+                <div class="electrician-card">
+                    <div class="electrician-header">
+                        <div class="electrician-avatar">
+                            <span class="material-symbols-rounded text-4xl">person</span>
+                        </div>
+                        <div class="electrician-info">
+                            <div class="electrician-name">Robert Thompson</div>
+                            <div class="electrician-title">Licensed Electrician</div>
+                        </div>
+                    </div>
+                    <div class="electrician-rating">★★★★★ (4.8/5)</div>
+                    <div class="electrician-details space-y-3">
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span>11+ Years Experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">home_repair_service</span>
+                            <span>Emergency & Repairs</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span>24/7 Available</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">shield</span>
+                            <span>Fully Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <div class="electrician-actions">
+                        <a href="https://electricians.wichita-area.com" class="btn-small btn-small-primary">
+                            <span class="material-symbols-rounded">electric_bolt</span>
+                            Book Now
+                        </a>
+                        <a href="tel:+1234567890" class="btn-small btn-small-secondary">
+                            <span class="material-symbols-rounded">phone</span>
+                            Call
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Electrician 6 -->
+                <div class="electrician-card">
+                    <div class="electrician-header">
+                        <div class="electrician-avatar">
+                            <span class="material-symbols-rounded text-4xl">person</span>
+                        </div>
+                        <div class="electrician-info">
+                            <div class="electrician-name">Amanda Chen</div>
+                            <div class="electrician-title">Licensed Electrician</div>
+                        </div>
+                    </div>
+                    <div class="electrician-rating">★★★★★ (4.9/5)</div>
+                    <div class="electrician-details space-y-3">
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">verified</span>
+                            <span>13+ Years Experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">home_repair_service</span>
+                            <span>Residential & Commercial</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span>Same-Day Available</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="material-symbols-rounded">shield</span>
+                            <span>Fully Licensed & Insured</span>
+                        </div>
+                    </div>
+                    <div class="electrician-actions">
+                        <a href="https://electricians.wichita-area.com" class="btn-small btn-small-primary">
+                            <span class="material-symbols-rounded">electric_bolt</span>
+                            Book Now
+                        </a>
+                        <a href="tel:+1234567890" class="btn-small btn-small-secondary">
+                            <span class="material-symbols-rounded">phone</span>
+                            Call
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 md:py-28 px-4 md:px-6 bg-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Ready to Get Started?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Choose from our team of experienced electricians and schedule your service today. Same-day appointments available!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://electricians.wichita-area.com" class="btn-primary text-lg">
+                    <span class="material-symbols-rounded">electric_bolt</span>
+                    Schedule Service Now
+                </a>
+                <a href="tel:+1234567890" class="btn-secondary text-lg">
+                    <span class="material-symbols-rounded">phone</span>
+                    Call Us Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-16 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand Column -->
+                <div>
+                    <h3 class="text-xl font-bold primary-accent mb-4">⚡ Wichita Electricians</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Your trusted partner for professional electrical services in Wichita, Kansas. Licensed, insured, and dedicated to excellence.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:primary-accent hover:bg-opacity-10 transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:primary-accent hover:bg-opacity-10 transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:primary-accent hover:bg-opacity-10 transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#features" class="text-gray-400 hover:primary-accent transition-colors duration-300">Services</a></li>
+                        <li><a href="index.html#benefits" class="text-gray-400 hover:primary-accent transition-colors duration-300">Benefits</a></li>
+                        <li><a href="index.html#testimonials" class="text-gray-400 hover:primary-accent transition-colors duration-300">Testimonials</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:primary-accent transition-colors duration-300">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:primary-accent transition-colors duration-300">Emergency Repairs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:primary-accent transition-colors duration-300">Installations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:primary-accent transition-colors duration-300">Maintenance</a></li>
+                        <li><a href="#" class="text-gray-400 hover:primary-accent transition-colors duration-300">Upgrades</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3">
+                            <span class="material-symbols-rounded text-primary-accent flex-shrink-0">mail</span>
+                            <a href="mailto:frank@wichita-area.com" class="text-gray-400 hover:primary-accent transition-colors duration-300">frank@wichita-area.com</a>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="material-symbols-rounded text-primary-accent flex-shrink-0">location_on</span>
+                            <span class="text-gray-400">Wichita, Kansas</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="material-symbols-rounded text-primary-accent flex-shrink-0">schedule</span>
+                            <span class="text-gray-400">24/7 Available</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2025 Wichita Area Electricians. All rights reserved.
+                    </p>
+                    <div class="flex flex-wrap gap-6 justify-start md:justify-end">
+                        <a href="privacy.html" class="text-gray-400 hover:primary-accent transition-colors duration-300 text-sm">Privacy Policy</a>
+                        <a href="terms.html" class="text-gray-400 hover:primary-accent transition-colors duration-300 text-sm">Terms of Service</a>
+                        <a href="blog.html" class="text-gray-400 hover:primary-accent transition-colors duration-300 text-sm">Blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    const icon = mobileMenuButton.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuButton.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    });
+                });
+            }
+
+            // Smooth Scroll for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
